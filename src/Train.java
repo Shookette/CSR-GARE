@@ -13,26 +13,48 @@ public class Train extends Thread{
 	 * 4) repart
 	 */
 	
+	/**
+	 * Constructeur d'un train initialise son quai, sa capacité, sa vitesse et son temps d'arret et lui indique qu'il est un daemon
+	 * @param quai Quai avec lequel le train est lié
+	 * @param capacite Capacité maximum du train (définit si le train est petit ou grand/ nombre de sièges du train)
+	 * @param vitesse Vitesse du train
+	 * @param arret Temps d'arrêt du train
+	 */
 	public Train(Quai quai, int capacite, int vitesse, int arret) {
 		this.quai = quai;
 		this.capacite = capacite;
 		this.vitesse = vitesse;
 		this.arret = arret;
-//		this.setDaemon(true);
+		this.setDaemon(true);
 	}
 	
+	/**
+	 * Getter de la capacité maximum du train
+	 * @return
+	 */
 	public int getCapacite() {
 		return this.capacite;
 	}
 	
+	/**
+	 * Setter du nombre de siège libre dans le train
+	 * @param nb
+	 */
 	public void setNbPlaceLibre(int nb) {
 		this.nbPlaceLibre = nb;
 	}
 	
+	/**
+	 * Getter du nombre de siège libre dans le train
+	 * @return
+	 */
 	public int getNbPlaceLibre() {
 		return this.nbPlaceLibre;
 	}
 	
+	/**
+	 * Execution du train avec son entrée et sa sortie en gare / quai
+	 */
 	public void run() {
 		while(true) {
 			this.quai.viderTrain(this);

@@ -13,6 +13,10 @@ public class Quai {
 	 * 1) Si une voie est libre alors un train peut entrer en gare. 
 	 */
 	
+	/**
+	 * Constructeur du quai
+	 * @param nbVoies
+	 */
 	public Quai(int nbVoies) {
 		this.nbVoies = nbVoies;
 		this.nbVoiesLibre = nbVoies;
@@ -20,6 +24,9 @@ public class Quai {
 		this.capaciteTotale = 0;
 	}
 	
+	/**
+	 * Fonction monterTrain qui permet aux voyageurs de monter dans un train
+	 */
 	synchronized public void monterTrain() {
 		System.out.println("VOYAGEUR :  "+
 				Thread.currentThread().getName()
@@ -53,6 +60,10 @@ public class Quai {
 		this.trains[i].setNbPlaceLibre(this.trains[i].getNbPlaceLibre()-1);
 	}
 	
+	/**
+	 * Fonction viderTrain, intialise le nombre de siège libre du train
+	 * @param train
+	 */
 	synchronized public void viderTrain(Train train) {
 //		System.out.println("TRAIN :  "+
 //				Thread.currentThread().getName()
@@ -66,6 +77,10 @@ public class Quai {
 //				+" est en direction de la gare");
 	}
 	
+	/**
+	 * Fonction arriverTrain qui indique que le train arrive en quai et gère la capacité total disponible
+	 * @param train
+	 */
 	synchronized public void arriverTrain(Train train) {
 //		System.out.println("TRAIN :  "+
 //				Thread.currentThread().getName()
@@ -78,9 +93,9 @@ public class Quai {
 			}
 		}
 		nbVoiesLibre--;
-		System.out.println("TRAIN :  "+
-				Thread.currentThread().getName()
-				+" essaye de se garer");
+//		System.out.println("TRAIN :  "+
+//				Thread.currentThread().getName()
+//				+" essaye de se garer");
 		int i = 0;
 		while (this.trains[i] != null && i < nbVoies) {
 			if (i == nbVoies - 1){
@@ -93,13 +108,17 @@ public class Quai {
 //					+" bloqué pour se garer");
 		}
 		this.trains[i] = train;
-		this.capaciteTotale += train.getCapacite();
+		this.capaciteTotale += train.getNbPlaceLibre();
 		System.out.println("TRAIN :  "+
 				Thread.currentThread().getName()
 				+" est arrivé en gare. \nLa nouvelle capacité est de : "+capaciteTotale);
 		notifyAll();
 	}
 	
+	/**
+	 * Fonction partirTrain qui indique que le train part et réinitialise la capacitéTotal sans le train
+	 * @param train
+	 */
 	synchronized public void partirTrain(Train train) {
 //		System.out.println("TRAIN :  "+
 //				Thread.currentThread().getName()
@@ -112,7 +131,7 @@ public class Quai {
 				i++;	
 			}
 		}
-		this.capaciteTotale -= this.trains[i].getCapacite();
+		this.capaciteTotale -= this.trains[i].getNbPlaceLibre();
 		System.out.println("La capacité total du quai est maintenant de : "+capaciteTotale);
 		this.trains[i] = null;
 		nbVoiesLibre++;

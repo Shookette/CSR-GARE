@@ -8,10 +8,17 @@ public class Billeterie {
 	 * imprimer un ticket met IMPRESSION_TICKET temps
 	 */
 	
+	/**
+	 * Constructeur de la billeterie qui initialise son nombre de guichet
+	 * @param nbGuichet
+	 */
 	public Billeterie(int nbGuichet) {
 		this.nbGuichet = nbGuichet;
 	}
 	
+	/**
+	 * Fonction vendreBillet, qui vend un billet puis l'imprime à un client
+	 */
 	synchronized public void vendreBillet() {
 		this.nbGuichet--;
 		while (this.nbGuichet < 0) {
