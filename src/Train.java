@@ -5,6 +5,7 @@ public class Train extends Thread{
 	private int vitesse;
 	private int capacite;
 	private int nbPlaceLibre;
+	private int nbVoyageur;
 	
 	/*
 	 * 1) arrive en gare en 10000 / VITESSE_TRAIN (en ms) > (comprit entre 50 et 300 km/h)
@@ -18,7 +19,7 @@ public class Train extends Thread{
 		this.capacite = capacite;
 		this.vitesse = vitesse;
 		this.arret = arret;
-//		this.setDaemon(true);
+		this.setDaemon(true);
 	}
 	
 	public int getCapacite() {
@@ -33,10 +34,17 @@ public class Train extends Thread{
 		return this.nbPlaceLibre;
 	}
 	
+	public void setNbVoyageur(int nb) {
+		this.nbVoyageur = nb;
+	}
+	
+	public int getNbVoyageur() {
+		return this.nbVoyageur;
+	}
+	
 	public void run() {
 		while(true) {
 			this.quai.viderTrain(this);
-//			System.out.println("Temps d'arrivée : "+10000 / this.vitesse +" le train roule à : "+this.vitesse);
 			try {
 				Thread.sleep(10000 / this.vitesse);
 			} catch(InterruptedException e) {}

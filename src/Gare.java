@@ -6,7 +6,7 @@ public class Gare {
 	static final int NB_TRAINS = 2;
 	static final int NB_VOYAGEURS = 10;
 	static final int NB_VOIES = 1;
-	static final int NB_GUICHET = 1;
+	static final int NB_GUICHET = 5;
 	static final int CAPACITE_TRAIN = 50;
 	static final int ARRET_TRAIN = 1000;
 	
@@ -27,8 +27,6 @@ public class Gare {
 		}
 		
 		voyageurs[nbVoyageurs] = new Voyageur(quai, billeterie);
-		System.out.println("voyageur : "+nbVoyageurs+" init");
-		
 		nbVoyageurs++;
 		return true;
 	}
@@ -36,7 +34,7 @@ public class Gare {
 	private boolean nouveauTrain() {
 		
 		if(nbTrains == NB_TRAINS) {
-			System.out.println("");
+			System.out.println("Le nombre maximum de trains est atteint.");
 			return false;
 		}
 		
@@ -44,17 +42,17 @@ public class Gare {
 		int vitesse = Math.abs(rand.nextInt((300 - 50) + 1) + 50);
 		int capacite = Math.abs(rand.nextInt(CAPACITE_TRAIN));
 		trains[nbTrains] = new Train(quai, capacite, vitesse, ARRET_TRAIN);
-		
 		nbTrains++;
 		return true;
 	}
 	
 	public Gare() {
+
+		//Création billeterie (int nbguichet)
+		this.billeterie = new Billeterie(NB_GUICHET, NB_VOIES);
 		
 		//Création quai (int nbvoie)
-		this.quai = new Quai(NB_VOIES);
-		//Création billeterie (int nbguichet)
-		this.billeterie = new Billeterie(NB_GUICHET);
+		this.quai = new Quai(NB_VOIES, this.billeterie);
 	
 		int i = 0;
 		
