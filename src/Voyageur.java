@@ -1,6 +1,8 @@
 public class Voyageur extends Thread{
 
+	//quai ou les voyageurs vont attendre un train
 	private Quai quai;
+	//Billeterie qui vend les billets aux voyageurs
 	private Billeterie billeterie;
 	
 	/**
@@ -13,27 +15,13 @@ public class Voyageur extends Thread{
 		this.billeterie = billeterie;
 	}
 	
-
-	/*
-	 * Voyageur
-	 * 1) Achete un billet
-	 * 2) Monte dans un train NON PLEINS des que possible
-	 */
 	/**
 	 * Fonction d'execution d'un client.
 	 */
 	public void run() {
-		System.out.println("VOYAGEUR :  "+
-				Thread.currentThread().getName()
-				+" va acheter un billet");
+		//le voyageur va acheter un billet dans la billeterie
 		billeterie.vendreBillet();
-		System.out.println("VOYAGEUR :  "+
-				Thread.currentThread().getName()
-				+" se dirige pour monter dans son train");
+		//Il monte dans un train qui a encore des places sur le quai
 		quai.monterTrain();
-		System.out.println("VOYAGEUR :  "+
-				Thread.currentThread().getName()
-				+" est monté dans le train");
-	}
-	
+	}	
 }
