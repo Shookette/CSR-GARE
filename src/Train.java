@@ -32,15 +32,15 @@ public class Train extends Thread{
 	
 	/**
 	 * Get Place acheté
-	 * @return le nombre de place acheté pour ce train
+	 * @return le nombre de places achetées pour ce train
 	 */
 	public int getPlaceAchetee() {
 		return this.getCapacite() - this.getNbPlaceLibre();
 	}
 	
 	/**
-	 * Set nbPlaceLibre(int) le nombre de place libre du train
-	 * @param nb nombre de place libre
+	 * Set nbPlaceLibre(int) le nombre de places libres du train
+	 * @param nb nombre de places libres
 	 */
 	public void setNbPlaceLibre(int nb) {
 		this.nbPlaceLibre = nb;
@@ -48,15 +48,15 @@ public class Train extends Thread{
 	
 	/**
 	 * Get PlaceLibre
-	 * @return le nombre de place libre pour ce train
+	 * @return le nombre de places libres pour ce train
 	 */
 	public int getNbPlaceLibre() {
 		return this.nbPlaceLibre;
 	}
 	
 	/**
-	 * Set nbVoyageur(int) le nombre de voyageur dans ce train
-	 * @param nb nombre de voyageur du train
+	 * Set nbVoyageur(int) le nombre de voyageurs dans ce train
+	 * @param nb nombre de voyageurs du train
 	 */
 	public void setNbVoyageur(int nb) {
 		this.nbVoyageur = nb;
@@ -64,7 +64,7 @@ public class Train extends Thread{
 	
 	/**
 	 * Get NbVoyageur
-	 * @return le nombre de voyageur pour ce train
+	 * @return le nombre de voyageurs pour ce train
 	 */
 	public int getNbVoyageur() {
 		return this.nbVoyageur;
@@ -79,18 +79,18 @@ public class Train extends Thread{
 	 * 4) repart
 	 */
 	public void run() {
-		//Permet de faire revenir les trains si tout les voyageurs ne sont pas encore partie
+		//Permet de faire revenir les trains si tous les voyageurs ne sont pas encore montés dans des trains
 		while(true) {
-			//Initialise le nombre de place libre et le nombre de voyageur dans le train
+			//Initialise le nombre de places libres et le nombre de voyageurs dans le train
 			this.quai.viderTrain(this);
-			//Attente le temps d'arriver du train dans la gare
+			//attends que le train arrive en gare
 			try {
 				Thread.sleep(10000 / this.vitesse);
 			} catch(InterruptedException e) {}
 			//Indique au quai que le train est arrivé
 			//Afin de pouvoir lui attribuer une voie disponible
 			this.quai.arriverTrain(this);
-			//Attend le temps d'arrêt définie pour le train
+			//Attend le temps d'arrêt défini pour le train
 			try {
 				Thread.sleep(this.arret);
 			} catch(InterruptedException e) {}
